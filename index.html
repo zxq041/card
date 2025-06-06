@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zxq0 | Portfolio | Prestige Edition v3</title>
+    <title>zxq0 | Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -20,7 +20,7 @@
             --navy-bg: #0a192f;
             --slate: #8892b0;
             --white: #e6f1ff;
-            --blue: #38bdf8; /* sky-400 */
+            --blue: #38bdf8; 
         }
 
         html.lenis { height: auto; }
@@ -202,7 +202,7 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
     
     <script>
-        // --- LENIS SMOOTH SCROLL ---
+        // Scrollowanie // 
         const lenis = new Lenis();
         function raf(time) {
             lenis.raf(time);
@@ -210,7 +210,7 @@
         }
         requestAnimationFrame(raf);
 
-        // --- GSAP ANIMATIONS ---
+        
         gsap.registerPlugin(ScrollTrigger);
         gsap.defaults({ ease: "power3.out", duration: 1 });
         const heroTexts = gsap.utils.toArray('[data-hero-text]');
@@ -225,7 +225,7 @@
             gsap.from(card, { y: 80, opacity: 0, scrollTrigger: { trigger: card, start: 'top 85%' } });
         });
 
-        // --- MOBILE MENU ---
+        
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
