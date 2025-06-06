@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zxq0 | Portfolio | Prestige Edition v3</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --dark-bg: #020c1b;
+            --navy-bg: #0a192f;
+            --slate: #8892b0;
+            --white: #e6f1ff;
+            --blue: #38bdf8; /* sky-400 */
+        }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--slate);
+            overflow-x: hidden;
+        }
+
+        /* --- Background Effects --- */
+        .background-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .stars {
+            width: 1px; height: 1px; background: transparent;
+            box-shadow: -34vw 3vh #FFF, 4vw 35vh #FFF, -45vw 3vh #FFF, 12vw 14vh #FFF, 2vw 20vh #FFF, 4vw 4vh #FFF, -3vw 22vh #FFF, -28vw 3vh #FFF, 4vw 11vh #FFF, -40vw 1vh #FFF, 15vw 17vh #FFF, 10vw 26vh #FFF;
+        }
+        .shape { position: absolute; list-style: none; display: block; background-color: rgba(56, 189, 248, 0.05); animation: float 25s linear infinite; bottom: -180px; }
+        .shape.s1 { left: 25%; width: 80px; height: 80px; animation-duration: 20s; }
+        .shape.s2 { left: 10%; width: 30px; height: 30px; animation-duration: 15s; animation-delay: 2s; }
+        .shape.s3 { left: 70%; width: 100px; height: 100px; animation-duration: 22s; animation-delay: 4s; }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; } }
+
+        /* --- Header & Logo --- */
+        .logo-container { position: relative; width: 56px; height: 56px; border-radius: 50%; }
+        .logo-container::before {
+            content: ''; position: absolute; inset: -2px; border-radius: 50%;
+            background: conic-gradient(from 90deg at 50% 50%, var(--blue), 25%, transparent);
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .logo-image { position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 50%; background: var(--dark-bg); padding: 4px; }
+
+        /* --- Glassmorphism Cards --- */
+        .glass-card {
+            position: relative; background: rgba(17, 34, 64, 0.3); backdrop-filter: blur(10px);
+            border: 1px solid rgba(136, 146, 176, 0.2); border-radius: 0.75rem;
+            padding: 2rem; transition: all 0.3s ease; overflow: hidden;
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.4); transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-wrapper">
+        <div class="stars"></div>
+        <div class="shape s1"></div> <div class="shape s2"></div> <div class="shape s3"></div>
+    </div>
+
+    <header class="fixed top-0 left-0 w-full bg-[#020c1b]/80 backdrop-blur-sm z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="logo-container">
+                <img src="https://i.imgur.com/yPOKvhM.png" alt="zxq0 Logo" class="logo-image">
+            </a>
+            <div class="hidden md:flex space-x-8 items-center font-semibold">
+                <a href="#services" class="text-slate-300 hover:text-sky-400 transition-colors duration-300">Oferta</a>
+                <a href="#projects" class="text-slate-300 hover:text-sky-400 transition-colors duration-300">Projekty</a>
+                <a href="#contact" class="text-slate-300 hover:text-sky-400 transition-colors duration-300">Kontakt</a>
+            </div>
+            <div class="flex items-center">
+                 <a href="https://discord.gg/litecode" target="_blank" class="hidden md:inline-block bg-sky-500 text-white font-bold py-2 px-5 rounded-md hover:bg-sky-600 transition-all duration-300 shadow-lg shadow-sky-500/30">
+                    Złóż zamówienie
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-slate-300 hover:text-sky-400 z-50 ml-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#112240] py-4">
+            <a href="#services" class="block text-center py-3 px-6 text-slate-300 hover:bg-[#233554] hover:text-sky-400">Oferta</a>
+            <a href="#projects" class="block text-center py-3 px-6 text-slate-300 hover:bg-[#233554] hover:text-sky-400">Projekty</a>
+            <a href="#contact" class="block text-center py-3 px-6 text-slate-300 hover:bg-[#233554] hover:text-sky-400">Kontakt</a>
+            <div class="mt-4 px-6">
+                <a href="https://discord.gg/litecode" target="_blank" class="block w-full text-center bg-sky-500 text-white font-bold py-3 px-5 rounded-md hover:bg-sky-600">Złóż zamówienie</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-6">
+        <section class="min-h-screen flex items-center pt-24 md:pt-0">
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white" data-hero-text>
+                    <span class="inline-block">Twój </span> <span class="inline-block">Pomysł</span>
+                </h1>
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-black text-sky-400 mt-2" data-hero-text>
+                    <span class="inline-block">Moje wykonanie.</span>
+                </h2>
+                <p class="max-w-xl text-lg text-slate-400 mt-10" data-hero-text>
+                    Specjalizuję się w tworzeniu rozwiązań cyfrowych, które przekraczają granice oczekiwań. Witaj w moim świecie, gdzie każdy projekt to nowa historia.
+                </p>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 md:py-32">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-2" data-section-title>Moja Oferta</h2>
+                <p class="text-sky-400 font-mono" data-section-title>Kompleksowe usługi dla Twojego projektu</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card text-center" data-card>
+                    <div class="text-sky-400 mb-6 inline-block"><svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg></div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Web Development</h3>
+                    <p class="text-slate-400">Nowoczesne strony i aplikacje webowe oparte o najnowsze technologie, zoptymalizowane pod kątem wydajności i SEO.</p>
+                </div>
+                <div class="glass-card text-center" data-card>
+                     <div class="text-sky-400 mb-6 inline-block"><svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.17 48.17 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg></div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Automatyzacja & Boty</h3>
+                    <p class="text-slate-400">Inteligentne boty na Discorda, skrypty automatyzujące zadania i integracje API, które oszczędzają Twój czas.</p>
+                </div>
+                <div class="glass-card text-center" data-card>
+                     <div class="text-sky-400 mb-6 inline-block"><svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg></div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Game Development</h3>
+                    <p class="text-slate-400">Pluginy do  Minecraft, assety i mechaniki, które wzbogacają wirtualne światy i angażują społeczność graczy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 md:py-32">
+            <div class="text-left mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight" data-section-title>
+                    Wybrane Realizacje
+                </h2>
+                <p class="text-sky-400 font-mono" data-section-title>Projekty, które mówią same za siebie</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                 <div class="glass-card lg:col-span-1 lg:row-span-2 flex flex-col h-full" data-card>
+                     <div class="flex items-center mb-6">
+                        <div class="bg-slate-800 p-2 rounded-md mr-4 flex-shrink-0">
+                            <img src="https://i.imgur.com/rJRLOLL.png" alt="Aura Network Logo" class="w-12 h-12 object-contain">
+                        </div>
+                        <h3 class="text-3xl font-bold text-white">Lite Code</h3>
+                    </div>
+                    <p class="text-slate-300 text-lg mb-8 flex-grow">LiteCode - Czyli społeczności programistów, developerów oraz techników, znajdziesz tu wsparcie oraz nasze usługi, możesz korzystać z naszych darmowych lub płatnych narzędzi które oddajemy do użytku publicznego. Miłej Zabawy. </p>
+                    <a href="https://discord.gg/litecode" target="_blank" class="font-semibold text-white bg-sky-500/80 py-3 px-6 rounded-md hover:bg-sky-500 transition mt-auto self-start">Sprawdź projekt</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+                    <div class="glass-card flex flex-col" data-card>
+                        <div class="flex items-center mb-6">
+                            <div class="bg-slate-800 p-2 rounded-md mr-4 flex-shrink-0">
+                               <img src="https://i.imgur.com/I8hLQ5j.png" alt="Project Volt Logo" class="w-8 h-8 object-contain">
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">LiteBot</h3>
+                        </div>
+                        <p class="text-slate-400 mb-8 flex-grow">Bot Discord odpowiadający za zabezpieczenie twojego serwera discord.</p>
+                        <a href="https://discord.gg/litecode" target="_blank" class="font-semibold text-sky-400 border border-sky-400/50 py-2 px-5 rounded-md hover:bg-sky-400/10 transition mt-auto self-start">Sprawdź projekt</a>
+                    </div>
+                    <div class="glass-card flex flex-col" data-card>
+                        <div class="flex items-center mb-6">
+                             <div class="bg-slate-800 p-2 rounded-md mr-4 flex-shrink-0">
+                                <img src="https://i.imgur.com/rJRLOLL.png" alt="LoreMaster Plugin Logo" class="w-8 h-8 object-contain">
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Lite 1.0</h3>
+                        </div>
+                        <p class="text-slate-400 mb-8 flex-grow">Innowacyjny moduł ai do tworzenia pluginów minecraft</p>
+                        <a href="https://discord.gg/litecode" target="_blank" class="font-semibold text-sky-400 border border-sky-400/50 py-2 px-5 rounded-md hover:bg-sky-400/10 transition mt-auto self-start">Wkrótce...</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="py-20 md:py-40 text-center">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-6" data-section-title>Masz Pomysł?</h2>
+            <p class="text-slate-400 max-w-xl mx-auto mb-12 text-lg" data-section-title>
+                Porozmawiajmy o tym, jak możemy przekształcić go w coś wyjątkowego. Jestem gotów podjąć się kolejnego wyzwania.
+            </p>
+            <div data-section-title>
+                 <a href="https://discord.gg/litecode" target="_blank" class="bg-sky-500 text-white font-bold py-4 px-8 rounded-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 inline-block shadow-2xl shadow-sky-500/30 text-lg">
+                    Złóż Zamówienie na Discordzie
+                 </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+    
+    <script>
+        // --- LENIS SMOOTH SCROLL ---
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- GSAP ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.defaults({ ease: "power3.out", duration: 1 });
+        const heroTexts = gsap.utils.toArray('[data-hero-text]');
+        heroTexts.forEach((text, i) => {
+            const words = text.querySelectorAll('.inline-block');
+            gsap.from(words.length > 0 ? words : text, { y: 80, opacity: 0, stagger: 0.1, delay: 0.5 + i * 0.1 });
+        });
+        gsap.utils.toArray('[data-section-title]').forEach(title => {
+            gsap.from(title, { y: 50, opacity: 0, scrollTrigger: { trigger: title, start: 'top 85%' } });
+        });
+        gsap.utils.toArray('[data-card]').forEach((card, i) => {
+            gsap.from(card, { y: 80, opacity: 0, scrollTrigger: { trigger: card, start: 'top 85%' } });
+        });
+
+        // --- MOBILE MENU ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    </script>
+</body>
+</html>
